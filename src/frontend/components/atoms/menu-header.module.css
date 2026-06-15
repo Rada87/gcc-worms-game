@@ -1,0 +1,14 @@
+.header {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--gcc-green);
+  letter-spacing: 0.02em;
+  margin: 0;
+}

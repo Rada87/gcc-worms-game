@@ -1,0 +1,211 @@
+/* Skoda Next — brand font from gcc.skoda-auto.com */
+@font-face {
+  font-family: "Skoda Next";
+  src: url("./assets/fonts/skoda-next/skoda-next-light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Skoda Next";
+  src: url("./assets/fonts/skoda-next/skoda-next-regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Skoda Next";
+  src: url("./assets/fonts/skoda-next/skoda-next-bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Skoda Next";
+  src: url("./assets/fonts/skoda-next/skoda-next-black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --gcc-font: "Skoda Next", system-ui, sans-serif;
+
+  --gcc-green: #78faae;
+  --gcc-green-primary: #419468;
+  --gcc-green-dark: #0e3a2f;
+  --gcc-green-dim: rgba(120, 250, 174, 0.18);
+  --gcc-green-glow: rgba(120, 250, 174, 0.08);
+  --gcc-green-hover: #59bc87;
+
+  --text: rgba(255, 255, 255, 0.88);
+  --bg: #070d0b;
+  --highlight: var(--gcc-green);
+  --links: var(--gcc-green);
+  --subheading: rgba(255, 255, 255, 0.42);
+  --color-danger: #e82b37;
+
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-border: rgba(255, 255, 255, 0.10);
+
+  --team-red-bg: #cc3333;
+  --team-red-fg: #ff7070;
+  --team-blue-bg: #2649d9;
+  --team-blue-fg: #7a9aff;
+  --team-purple-bg: #a226d9;
+  --team-purple-fg: #cc80ff;
+  --team-yellow-bg: #d9c526;
+  --team-yellow-fg: #ffe566;
+  --team-orange-bg: #d97a26;
+  --team-orange-fg: #ffb366;
+  --team-green-bg: #30d926;
+  --team-green-fg: #7aff70;
+  --team-unk-bg: #cc00cc;
+  --team-unk-fg: #ff66ff;
+
+  font-family: var(--gcc-font);
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--text);
+  background-color: var(--bg);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ── Global resets ── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+a {
+  font-weight: 500;
+  color: var(--gcc-green);
+  text-decoration: inherit;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  background: var(--bg);
+}
+
+#app {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+/* ── Global form controls ── */
+
+button {
+  font-family: var(--gcc-font);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  padding: 0.5em 1.3em;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid var(--surface-border);
+  background: var(--surface);
+  color: var(--text);
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+button:hover:not(:disabled) {
+  border-color: var(--gcc-green-primary);
+  color: var(--gcc-green);
+  background: rgba(65, 148, 104, 0.1);
+}
+
+button:disabled {
+  opacity: 0.28;
+  cursor: default;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"] {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--surface-border);
+  border-radius: 4px;
+  color: var(--text);
+  font-family: var(--gcc-font);
+  font-size: 0.9rem;
+  padding: 0.45em 0.8em;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+  border-color: var(--gcc-green-primary);
+  background: rgba(65, 148, 104, 0.08);
+}
+
+select {
+  appearance: none;
+  background: rgba(255, 255, 255, 0.05)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='rgba(255,255,255,0.4)'/%3E%3C/svg%3E")
+    no-repeat right 0.8em center;
+  border: 1px solid var(--surface-border);
+  border-radius: 4px;
+  color: var(--text);
+  font-family: var(--gcc-font);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.5em 2.4em 0.5em 0.8em;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+select:focus {
+  border-color: var(--gcc-green-primary);
+}
+
+select option {
+  background: #0e2018;
+  color: var(--text);
+}
+
+input[type="range"] {
+  accent-color: var(--gcc-green-primary);
+  cursor: pointer;
+}
+
+input[type="checkbox"] {
+  accent-color: var(--gcc-green-primary);
+  width: 1.1em;
+  height: 1.1em;
+  cursor: pointer;
+}
+
+/* ── Section headings used in submenus ── */
+
+h2 {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--subheading);
+  margin: 0 0 0.75rem;
+}
+
+h3 {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.28);
+  margin: 0.5rem 0;
+}

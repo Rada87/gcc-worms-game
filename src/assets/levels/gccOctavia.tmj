@@ -1,0 +1,581 @@
+{
+ "compressionlevel": -1,
+ "height": 58,
+ "infinite": false,
+ "layers": [
+  {
+   "id": 1,
+   "image": "gccOctavia.png",
+   "locked": true,
+   "name": "foreground",
+   "opacity": 1,
+   "properties": [
+    {
+     "name": "wormgine.background_asset",
+     "type": "string",
+     "value": "levels_gccOctaviaBg"
+    },
+    {
+     "name": "wormgine.layer_role",
+     "type": "string",
+     "value": "foreground"
+    },
+    {
+     "name": "wormgine.terrain_destructible",
+     "type": "bool",
+     "value": true
+    }
+   ],
+   "type": "imagelayer",
+   "visible": true,
+   "x": 0,
+   "y": 0
+  },
+  {
+   "draworder": "topdown",
+   "id": 2,
+   "name": "objects",
+   "objects": [
+    {
+     "gid": 6,
+     "height": 44,
+     "id": 1,
+     "name": "rules",
+     "properties": [
+      {
+       "name": "wormgine.end_condition",
+       "propertytype": "GameWinCondition",
+       "type": "string",
+       "value": "Deathmatch"
+      }
+     ],
+     "rotation": 0,
+     "type": "",
+     "visible": true,
+     "width": 33,
+     "x": 50,
+     "y": -80
+    },
+    {
+     "height": 0,
+     "id": 2,
+     "name": "water",
+     "point": true,
+     "rotation": 0,
+     "type": "wormgine.water",
+     "visible": true,
+     "width": 0,
+     "x": 50,
+     "y": 920
+    },
+    {
+     "gid": 8,
+     "height": 44,
+     "id": 3,
+     "name": "team_red",
+     "properties": [
+      {
+       "name": "wormgine.loadout",
+       "propertytype": "wormgine.weapon_loadout",
+       "type": "class",
+       "value": {
+        "wep_bazooka": -1,
+        "wep_firework": -1,
+        "wep_grenade": -1,
+        "wep_mine": -1,
+        "wep_missile": -1,
+        "wep_shotgun": -1
+       }
+      },
+      {
+       "name": "wormgine.team_group",
+       "propertytype": "WormTeamGroup",
+       "type": "string",
+       "value": "Red"
+      },
+      {
+       "name": "wormgine.team_name",
+       "type": "string",
+       "value": "\u0160KODA GCC"
+      },
+      {
+       "name": "wormgine.worm_names",
+       "type": "string",
+       "value": "Codie;Cacheman;Bitwise;Hexdump;Forkbomb"
+      }
+     ],
+     "rotation": 0,
+     "type": "",
+     "visible": true,
+     "width": 33,
+     "x": 60,
+     "y": -160
+    },
+    {
+     "gid": 8,
+     "height": 44,
+     "id": 4,
+     "name": "team_blue",
+     "properties": [
+      {
+       "name": "wormgine.loadout",
+       "propertytype": "wormgine.weapon_loadout",
+       "type": "class",
+       "value": {
+        "wep_bazooka": -1,
+        "wep_firework": -1,
+        "wep_grenade": -1,
+        "wep_mine": -1,
+        "wep_missile": -1,
+        "wep_shotgun": -1
+       }
+      },
+      {
+       "name": "wormgine.team_group",
+       "propertytype": "WormTeamGroup",
+       "type": "string",
+       "value": "Blue"
+      },
+      {
+       "name": "wormgine.team_name",
+       "type": "string",
+       "value": "Octavia Crew"
+      },
+      {
+       "name": "wormgine.worm_names",
+       "type": "string",
+       "value": "P\u00edsto\u0148;Karb\u00edk;Tacho\u0161;Benz\u00edn;Difer\u00e1k"
+      }
+     ],
+     "rotation": 0,
+     "type": "",
+     "visible": true,
+     "width": 33,
+     "x": 200,
+     "y": -160
+    },
+    {
+     "gid": 4,
+     "height": 44,
+     "id": 5,
+     "name": "spawn_red_1",
+     "properties": [
+      {
+       "name": "wormgine.team_group",
+       "propertytype": "WormTeamGroup",
+       "type": "string",
+       "value": "Red"
+      }
+     ],
+     "rotation": 0,
+     "type": "",
+     "visible": true,
+     "width": 33,
+     "x": 584,
+     "y": 294
+    },
+    {
+     "gid": 4,
+     "height": 44,
+     "id": 6,
+     "name": "spawn_red_2",
+     "properties": [
+      {
+       "name": "wormgine.team_group",
+       "propertytype": "WormTeamGroup",
+       "type": "string",
+       "value": "Red"
+      }
+     ],
+     "rotation": 0,
+     "type": "",
+     "visible": true,
+     "width": 33,
+     "x": 124,
+     "y": 237
+    },
+    {
+     "gid": 4,
+     "height": 44,
+     "id": 7,
+     "name": "spawn_red_3",
+     "properties": [
+      {
+       "name": "wormgine.team_group",
+       "propertytype": "WormTeamGroup",
+       "type": "string",
+       "value": "Red"
+      }
+     ],
+     "rotation": 0,
+     "type": "",
+     "visible": true,
+     "width": 33,
+     "x": 309,
+     "y": 209
+    },
+    {
+     "gid": 4,
+     "height": 44,
+     "id": 8,
+     "name": "spawn_blue_1",
+     "properties": [
+      {
+       "name": "wormgine.team_group",
+       "propertytype": "WormTeamGroup",
+       "type": "string",
+       "value": "Blue"
+      }
+     ],
+     "rotation": 0,
+     "type": "",
+     "visible": true,
+     "width": 33,
+     "x": 904,
+     "y": 98
+    },
+    {
+     "gid": 4,
+     "height": 44,
+     "id": 9,
+     "name": "spawn_blue_2",
+     "properties": [
+      {
+       "name": "wormgine.team_group",
+       "propertytype": "WormTeamGroup",
+       "type": "string",
+       "value": "Blue"
+      }
+     ],
+     "rotation": 0,
+     "type": "",
+     "visible": true,
+     "width": 33,
+     "x": 1064,
+     "y": 190
+    },
+    {
+     "gid": 4,
+     "height": 44,
+     "id": 10,
+     "name": "spawn_blue_3",
+     "properties": [
+      {
+       "name": "wormgine.team_group",
+       "propertytype": "WormTeamGroup",
+       "type": "string",
+       "value": "Blue"
+      }
+     ],
+     "rotation": 0,
+     "type": "",
+     "visible": true,
+     "width": 33,
+     "x": 1214,
+     "y": 299
+    },
+    {
+     "gid": 4,
+     "height": 44,
+     "id": 13,
+     "name": "spawn_red_4",
+     "properties": [
+      {
+       "name": "wormgine.team_group",
+       "propertytype": "WormTeamGroup",
+       "type": "string",
+       "value": "Red"
+      }
+     ],
+     "rotation": 0,
+     "type": "",
+     "visible": true,
+     "width": 33,
+     "x": 404,
+     "y": 285
+    },
+    {
+     "gid": 4,
+     "height": 44,
+     "id": 14,
+     "name": "spawn_red_5",
+     "properties": [
+      {
+       "name": "wormgine.team_group",
+       "propertytype": "WormTeamGroup",
+       "type": "string",
+       "value": "Red"
+      }
+     ],
+     "rotation": 0,
+     "type": "",
+     "visible": true,
+     "width": 33,
+     "x": 714,
+     "y": 194
+    },
+    {
+     "gid": 4,
+     "height": 44,
+     "id": 15,
+     "name": "spawn_blue_4",
+     "properties": [
+      {
+       "name": "wormgine.team_group",
+       "propertytype": "WormTeamGroup",
+       "type": "string",
+       "value": "Blue"
+      }
+     ],
+     "rotation": 0,
+     "type": "",
+     "visible": true,
+     "width": 33,
+     "x": 1384,
+     "y": 147
+    },
+    {
+     "gid": 4,
+     "height": 44,
+     "id": 16,
+     "name": "spawn_blue_5",
+     "properties": [
+      {
+       "name": "wormgine.team_group",
+       "propertytype": "WormTeamGroup",
+       "type": "string",
+       "value": "Blue"
+      }
+     ],
+     "rotation": 0,
+     "type": "",
+     "visible": true,
+     "width": 33,
+     "x": 1484,
+     "y": 154
+    },
+    {
+     "gid": 4,
+     "height": 44,
+     "id": 17,
+     "name": "spawn_red_6",
+     "properties": [
+      {
+       "name": "wormgine.team_group",
+       "propertytype": "WormTeamGroup",
+       "type": "string",
+       "value": "Red"
+      }
+     ],
+     "rotation": 0,
+     "type": "",
+     "visible": true,
+     "width": 33,
+     "x": 74,
+     "y": 247
+    },
+    {
+     "gid": 4,
+     "height": 44,
+     "id": 18,
+     "name": "spawn_red_7",
+     "properties": [
+      {
+       "name": "wormgine.team_group",
+       "propertytype": "WormTeamGroup",
+       "type": "string",
+       "value": "Red"
+      }
+     ],
+     "rotation": 0,
+     "type": "",
+     "visible": true,
+     "width": 33,
+     "x": 224,
+     "y": 237
+    },
+    {
+     "gid": 4,
+     "height": 44,
+     "id": 19,
+     "name": "spawn_red_8",
+     "properties": [
+      {
+       "name": "wormgine.team_group",
+       "propertytype": "WormTeamGroup",
+       "type": "string",
+       "value": "Red"
+      }
+     ],
+     "rotation": 0,
+     "type": "",
+     "visible": true,
+     "width": 33,
+     "x": 454,
+     "y": 290
+    },
+    {
+     "gid": 4,
+     "height": 44,
+     "id": 20,
+     "name": "spawn_red_9",
+     "properties": [
+      {
+       "name": "wormgine.team_group",
+       "propertytype": "WormTeamGroup",
+       "type": "string",
+       "value": "Red"
+      }
+     ],
+     "rotation": 0,
+     "type": "",
+     "visible": true,
+     "width": 33,
+     "x": 624,
+     "y": 268
+    },
+    {
+     "gid": 4,
+     "height": 44,
+     "id": 21,
+     "name": "spawn_red_10",
+     "properties": [
+      {
+       "name": "wormgine.team_group",
+       "propertytype": "WormTeamGroup",
+       "type": "string",
+       "value": "Red"
+      }
+     ],
+     "rotation": 0,
+     "type": "",
+     "visible": true,
+     "width": 33,
+     "x": 774,
+     "y": 174
+    },
+    {
+     "gid": 4,
+     "height": 44,
+     "id": 22,
+     "name": "spawn_blue_6",
+     "properties": [
+      {
+       "name": "wormgine.team_group",
+       "propertytype": "WormTeamGroup",
+       "type": "string",
+       "value": "Blue"
+      }
+     ],
+     "rotation": 0,
+     "type": "",
+     "visible": true,
+     "width": 33,
+     "x": 834,
+     "y": 112
+    },
+    {
+     "gid": 4,
+     "height": 44,
+     "id": 23,
+     "name": "spawn_blue_7",
+     "properties": [
+      {
+       "name": "wormgine.team_group",
+       "propertytype": "WormTeamGroup",
+       "type": "string",
+       "value": "Blue"
+      }
+     ],
+     "rotation": 0,
+     "type": "",
+     "visible": true,
+     "width": 33,
+     "x": 984,
+     "y": 176
+    },
+    {
+     "gid": 4,
+     "height": 44,
+     "id": 24,
+     "name": "spawn_blue_8",
+     "properties": [
+      {
+       "name": "wormgine.team_group",
+       "propertytype": "WormTeamGroup",
+       "type": "string",
+       "value": "Blue"
+      }
+     ],
+     "rotation": 0,
+     "type": "",
+     "visible": true,
+     "width": 33,
+     "x": 1114,
+     "y": 194
+    },
+    {
+     "gid": 4,
+     "height": 44,
+     "id": 25,
+     "name": "spawn_blue_9",
+     "properties": [
+      {
+       "name": "wormgine.team_group",
+       "propertytype": "WormTeamGroup",
+       "type": "string",
+       "value": "Blue"
+      }
+     ],
+     "rotation": 0,
+     "type": "",
+     "visible": true,
+     "width": 33,
+     "x": 1274,
+     "y": 118
+    },
+    {
+     "gid": 4,
+     "height": 44,
+     "id": 26,
+     "name": "spawn_blue_10",
+     "properties": [
+      {
+       "name": "wormgine.team_group",
+       "propertytype": "WormTeamGroup",
+       "type": "string",
+       "value": "Blue"
+      }
+     ],
+     "rotation": 0,
+     "type": "",
+     "visible": true,
+     "width": 33,
+     "x": 1539,
+     "y": 312
+    }
+   ],
+   "opacity": 1,
+   "type": "objectgroup",
+   "visible": true,
+   "x": 0,
+   "y": 0
+  }
+ ],
+ "nextlayerid": 3,
+ "nextobjectid": 27,
+ "orientation": "orthogonal",
+ "renderorder": "right-down",
+ "tiledversion": "1.11.0",
+ "tileheight": 16,
+ "tilesets": [
+  {
+   "firstgid": 1,
+   "source": "../objects.tsj"
+  }
+ ],
+ "tilewidth": 16,
+ "type": "map",
+ "version": "1.11",
+ "width": 106
+}

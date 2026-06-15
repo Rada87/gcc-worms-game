@@ -1,0 +1,79 @@
+/* Team name editable input */
+.editable {
+  font-size: 1.6rem;
+  font-weight: 900;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0;
+  margin: 0 0 1rem;
+  padding: 0.1em 0;
+  color: var(--text);
+  font-family: var(--gcc-font);
+  outline: none;
+  transition: border-color 0.15s;
+  width: 100%;
+}
+
+.editable:focus {
+  border-bottom-color: var(--gcc-green-primary);
+}
+
+/* Flag upload button */
+.flagUpload {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 0.75rem 1.5rem;
+  color: var(--subheading);
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  min-height: 56px;
+  transition: border-color 0.15s;
+
+  img {
+    max-width: 48px;
+    max-height: 48px;
+    display: block;
+  }
+}
+
+.flagUpload:hover {
+  border-color: var(--gcc-green-primary);
+  color: var(--gcc-green);
+}
+
+/* Team editor card */
+.teamEditor {
+  border: 1px solid var(--surface-border);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.02);
+  margin: 1em 0;
+  padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+
+  section {
+    margin-bottom: 1.25rem;
+  }
+
+  ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    li {
+      margin: 0;
+
+      input[type="text"] {
+        width: 100%;
+        max-width: 280px;
+      }
+    }
+  }
+}

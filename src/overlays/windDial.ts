@@ -1,0 +1,90 @@
+import { Container, Graphics, Texture, TilingSprite } from "pixi.js";
+import { applyGenericBoxStyle, drawPixelBox } from "../mixins/styles";
+import { GameWorld, MAX_WIND } from "../world";
+import { AssetTextures } from "../assets/manifest";
+import { Observable } from "rxjs";
+
+/**
+ * Displays toast at the top of the screen during gameplay.
+ */
+export class WindDial {
+  public static loadAssets(textures: AssetTextures) {
+    this.texture = textures.windScroll;
+  }
+  private static texture: Texture;
+
+  private readonly gfx: Graphics;
+  public readonly container: Container;
+  private readonly windScroller: TilingSprite;
+  public currentWind: number | null = null;
+  private readonly windX: number;
+  private readonly windY: number;
+
+  constructor(
+    private readonly position: Observable<{ x: number; y: number }>,
+    private world: GameWorld,
+  ) {
+    this.gfx = new Graphics({});
+
+    this.windX = 14;
+    this.windY = 10;
+    this.windScroller = new TilingSprite({
+      texture: WindDial.texture,
+      width: 0,
+      height: 20,
+      x: this.windX,
+      y: this.windY + 5,
+      tint: 0xffffff,
+      alpha: 1,
+      tileScale: {
+        x: 0.1,
+        y: 0.1,
+      },
+    });
+    this.container = new Container({});
+    this.container.addChild(this.gfx, this.windScroller);
+    this.position.subscribe((pos) => {
+      this.container.position.set(pos.x, pos.y);
+    });
+  }
+
+  public update() {
+    if (this.currentWind !== null) {
+      this.windScroller.tilePosition.x += this.currentWind * 0.1;
+      const windAbsDelta = Math.abs(this.world.wind - this.currentWind);
+      if (windAbsDelta <= 0.1) {
+        return;
+      }
+    } else {
+      this.currentWind = 0;
+    }
+    this.gfx.clear();
+
+    // Move progressively
+    if (this.world.wind > this.currentWind) {
+      this.currentWind += 0.1;
+    } else if (this.world.wind < this.currentWind) {
+      this.currentWind -= 0.1;
+    }
+
+    drawPixelBox(this.gfx, this.windX, this.windY, 240, 30);
+
+    const windScale = this.currentWind / MAX_WIND;
+    const boxX =
+      (windScale >= 0 ? this.windX + 120 : this.windX + 120 + 120 * windScale) +
+      2;
+    this.gfx
+      .setFillStyle({ color: windScale > 0 ? 0xdb6f6f : 0x7085db })
+      .rect(boxX, this.windY + 3, 115 * Math.abs(windScale), 24)
+      .fill();
+    this.windScroller.y = this.windY + 5;
+    this.windScroller.x = boxX;
+    this.windScroller.tileRotation = windScale > 0 ? Math.PI : 0;
+    this.windScroller.tint = windScale > 0 ? 0xcc3333 : 0x2649d9;
+    this.windScroller.width = 115 * Math.abs(windScale);
+    applyGenericBoxStyle(this.gfx)
+      .moveTo(this.windX + 120, this.windY)
+      .lineTo(this.windX + 120, this.windY + 30)
+      .stroke();
+  }
+}

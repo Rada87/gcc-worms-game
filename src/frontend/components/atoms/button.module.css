@@ -1,0 +1,29 @@
+.button {
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: transparent;
+  color: var(--text);
+  font-family: var(--gcc-font);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.button:hover {
+  border-color: var(--gcc-green);
+  color: var(--gcc-green);
+}
+
+.error {
+  border: 1px solid var(--color-danger);
+  border-radius: 4px;
+  background: rgba(232, 43, 55, 0.06);
+  color: var(--color-danger);
+  font-family: var(--gcc-font);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}

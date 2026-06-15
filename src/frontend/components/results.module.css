@@ -1,0 +1,228 @@
+.screen {
+  position: fixed;
+  inset: 0;
+  background: var(--gcc-green-dark, #0e3a2f);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  font-family: var(--gcc-font);
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Subtle grid background */
+.screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(120, 250, 174, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 250, 174, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+
+/* Corner frame */
+.screen::after {
+  content: "";
+  position: absolute;
+  inset: 24px;
+  border: 1px solid rgba(120, 250, 174, 0.15);
+  pointer-events: none;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.gameOver {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.winnerLine {
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: var(--gcc-green);
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.drawLine {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.02em;
+}
+
+.teams {
+  display: flex;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.teamCard {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 1.5rem 1.8rem;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: border-color 0.2s;
+}
+
+.teamCard.winner {
+  border-color: var(--gcc-green);
+  background: rgba(65, 148, 104, 0.15);
+  box-shadow: 0 0 40px rgba(65, 148, 104, 0.25);
+}
+
+.teamCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.winBadge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: var(--gcc-green);
+  color: var(--gcc-green-dark, #0e3a2f);
+  padding: 0.25em 0.65em;
+  border-radius: 2px;
+  margin-left: auto;
+}
+
+.teamName {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.worms {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.wormRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.wormLabel {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.wormName {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 130px;
+}
+
+.hp {
+  font-variant-numeric: tabular-nums;
+}
+
+.hp.alive {
+  color: var(--gcc-green);
+}
+
+.hp.dead {
+  color: rgba(255, 255, 255, 0.22);
+}
+
+.hpBar {
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.hpFill {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--gcc-green-primary, #419468);
+  transition: width 0.6s ease;
+}
+
+.hpFill.dead {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.btnPrimary {
+  padding: 0.7em 2em;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: var(--gcc-font);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--gcc-green-primary, #419468);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btnPrimary:hover {
+  background: var(--gcc-green-hover, #59bc87);
+}
+
+.btnSecondary {
+  padding: 0.7em 2em;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: var(--gcc-font);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.btnSecondary:hover {
+  border-color: var(--gcc-green);
+  color: var(--gcc-green);
+}
+
+.logo {
+  position: absolute;
+  bottom: 2rem;
+  right: 2.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(120, 250, 174, 0.4);
+}

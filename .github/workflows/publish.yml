@@ -1,0 +1,67 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets the GITHUB_TOKEN permissions to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Generate build number
+        run: |
+          echo "VITE_BUILD_NUMBER=$((GITHUB_RUN_NUMBER))" >> $GITHUB_ENV
+          echo "VITE_BUILD_COMMIT=$GITHUB_SHA" >> $GITHUB_ENV
+          echo "VITE_DEFAULT_HOMESERVER=https://kcore.half-shot.uk" >> $GITHUB_ENV
+          echo "VITE_REGISTRATION_TOKEN=wg-w1-xooNi3ahzah5" >> $GITHUB_ENV
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".node-version"
+          cache: "yarn"
+      - name: Install dependencies
+        run: yarn
+      - name: Build
+        run: yarn build --base '/gcc-worms-game'
+      - name: Set up mdBook
+        uses: peaceiris/actions-mdbook@v1
+        with:
+          mdbook-version: "0.4.45"
+      - name: Build docs
+        run: yarn docs:build && cp -r book dist/docs
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+        with:
+          # Auto-enable GitHub Pages (source = GitHub Actions) via the API so no
+          # manual repo-settings step is needed on a fresh repository.
+          enablement: true
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload dist repository
+          path: "./dist"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

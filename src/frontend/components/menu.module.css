@@ -1,0 +1,235 @@
+/* ── Full-screen background ── */
+.appBg {
+  position: fixed;
+  inset: 0;
+  background-image: url("../../assets/ui/menu-bg.png");
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  z-index: 0;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      160deg,
+      rgba(7, 13, 11, 0.82) 0%,
+      rgba(7, 13, 11, 0.65) 55%,
+      rgba(14, 58, 47, 0.55) 100%
+    );
+  }
+}
+
+/* ── Menu container — vertically + horizontally centered ── */
+.menu {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  z-index: 1;
+
+  > menu {
+    min-width: 33vw;
+    width: fit-content;
+    max-height: 92vh;
+    overflow-y: auto;
+    padding: 4vh 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gcc-green-dim) transparent;
+  }
+}
+
+h1 {
+  font-size: 2.8em;
+  font-weight: 900;
+  text-align: center;
+  color: var(--gcc-green);
+  letter-spacing: 0.01em;
+  margin-bottom: 0.1em;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.25);
+  margin-top: 0;
+  margin-bottom: 2.8rem;
+}
+
+.betaWarning {
+  border: 1px solid var(--gcc-green-dim);
+  border-radius: 4px;
+  padding: 1em;
+  background: var(--gcc-green-glow);
+
+  span {
+    display: block;
+    margin-top: 1em;
+    margin-left: auto;
+    width: fit-content;
+  }
+}
+
+/* ── Sections wrapper ── */
+.mainMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 0;
+  list-style: none;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+/* ── Section group ── */
+.menuSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.sectionLabel {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.25);
+  padding-left: 0.15em;
+  margin: 0 0 0.2rem;
+}
+
+.sectionTiles {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ── Primary "hero" tile (Play) ── */
+button.primaryTile {
+  position: relative;
+  border: 1px solid rgba(65, 148, 104, 0.45);
+  background: rgba(14, 58, 47, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0;
+  cursor: pointer;
+  width: 38em;
+  height: 8.5em;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  letter-spacing: 0;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(65, 148, 104, 0.18) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  > video {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.12;
+  }
+
+  > span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.1rem;
+    font-weight: 900;
+    font-family: var(--gcc-font);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gcc-green);
+    pointer-events: none;
+    white-space: nowrap;
+    text-shadow: 0 0 24px rgba(120, 250, 174, 0.4);
+  }
+}
+
+button.primaryTile:hover {
+  border-color: var(--gcc-green);
+  background: rgba(14, 58, 47, 0.65);
+  box-shadow: 0 0 28px rgba(65, 148, 104, 0.28), inset 0 0 20px rgba(65, 148, 104, 0.1);
+}
+
+/* ── Regular secondary tiles ── */
+button.videoButton {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 0;
+  cursor: pointer;
+  width: 18em;
+  height: 7em;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  letter-spacing: 0;
+
+  > video {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.10;
+  }
+
+  > span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.82rem;
+    font-weight: 700;
+    font-family: var(--gcc-font);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.65);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+}
+
+button.videoButton:hover {
+  border-color: var(--gcc-green-primary);
+  background: rgba(14, 58, 47, 0.50);
+  box-shadow: 0 0 16px rgba(65, 148, 104, 0.18);
+
+  > span {
+    color: var(--gcc-green);
+  }
+}
+
+.error {
+  padding: 1em;
+  border: 1px solid var(--color-danger);
+  background: rgba(232, 43, 55, 0.08);
+  color: var(--color-danger);
+  border-radius: 4px;
+}
+
+/* small footer links */
+p {
+  font-size: 0.85em;
+  color: var(--subheading);
+  text-align: center;
+  margin: 0.3em 0;
+}

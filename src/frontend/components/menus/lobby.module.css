@@ -1,0 +1,169 @@
+.controlGrid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr 1fr;
+  width: 70vw;
+  max-width: 960px;
+}
+
+/* ── Team picker box ── */
+.teamBox {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 200px;
+  border: 1px solid var(--surface-border);
+  border-radius: 6px;
+  overflow: hidden;
+
+  ol, ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .localTeams {
+    border-right: 1px solid var(--surface-border);
+    padding: 0.75rem;
+  }
+
+  > div:not(.localTeams) {
+    padding: 0.75rem;
+  }
+
+  h3 {
+    padding: 0 0 0.5rem;
+    margin: 0 0 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+}
+
+/* Available team button (click to add) */
+.teamButton {
+  width: 100%;
+  text-align: left;
+  padding: 0.45em 0.85em;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  margin-bottom: 0.4rem;
+}
+
+.teamButton:hover {
+  border-color: var(--gcc-green-primary);
+  background: rgba(65, 148, 104, 0.12);
+  color: var(--gcc-green);
+}
+
+/* In-play team entry row */
+.teamEntry {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.85rem;
+
+  > span {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .playerName {
+    color: var(--subheading);
+    font-size: 0.78rem;
+  }
+
+  button {
+    padding: 0.25em 0.6em;
+    font-size: 0.75rem;
+    letter-spacing: 0;
+  }
+
+  .removeTeam {
+    border-color: rgba(232, 43, 55, 0.4);
+    color: var(--color-danger);
+    background: rgba(232, 43, 55, 0.08);
+    flex-shrink: 0;
+  }
+
+  .removeTeam:hover {
+    border-color: var(--color-danger);
+    background: rgba(232, 43, 55, 0.18);
+    color: var(--color-danger);
+  }
+}
+
+/* Worm count button */
+.wormCount {
+  padding: 0.2em 0.5em;
+  min-width: 3rem;
+  text-align: center;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 2px;
+    flex-wrap: wrap;
+    width: auto;
+  }
+  li {
+    display: block;
+    list-style: none;
+    float: none;
+  }
+}
+
+/* Team color swatch button */
+.teamColor {
+  display: inline-flex;
+  height: 1.6em;
+  width: 1.6em;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Bottom action buttons */
+section:last-child {
+  display: flex;
+  gap: 0.75rem;
+  padding-top: 1.25rem;
+
+  button:first-child {
+    border-color: var(--gcc-green-primary);
+    background: var(--gcc-green-primary);
+    color: #fff;
+    font-weight: 700;
+  }
+
+  button:first-child:hover:not(:disabled) {
+    background: var(--gcc-green-hover);
+    border-color: var(--gcc-green-hover);
+    color: #fff;
+  }
+}
+
+/* Intro paragraph */
+> p {
+  color: var(--subheading);
+  font-size: 0.88rem;
+  margin: 0 0 1.25rem;
+}
