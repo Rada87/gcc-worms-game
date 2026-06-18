@@ -398,6 +398,8 @@ export default async function runScenario(game: Game<HotReloadGameState>) {
           overlay.toaster.pushToast(nextState.toast, 3500, undefined, true);
         }
         if ("winningTeams" in nextState) {
+          game.pixiApp.ticker.remove(roundHandlerFn);
+          roundStateSub.unsubscribe();
           if (nextState.winningTeams.length) {
             overlay.toaster.pushToast(
               templateRandomText(TeamWinnerText, {
@@ -405,35 +407,32 @@ export default async function runScenario(game: Game<HotReloadGameState>) {
               }),
               8000,
             );
-            game.pixiApp.ticker.remove(roundHandlerFn);
-            roundStateSub.unsubscribe();
-            let endOfGameFadeOut = 8000;
-            game.pixiApp.ticker.add((dt) => {
-              endOfGameFadeOut -= dt.deltaMS;
-              if (endOfGameFadeOut < 0) {
-                game.pixiApp.ticker.remove(roundHandlerFn);
-                const winnerUuids = new Set(
-                  gameState.getActiveTeams().map((t) => t.uuid),
-                );
-                game.gameReactChannel.goToMenu(
-                  gameState.getTeams().map((t) => ({
-                    name: t.name,
-                    uuid: t.uuid,
-                    group: t.group,
-                    isWinner: winnerUuids.has(t.uuid),
-                    worms: t.worms.map((w) => ({
-                      name: w.name,
-                      health: w.health,
-                      maxHealth: w.maxHealth,
-                    })),
-                  })),
-                );
-              }
-            });
           } else {
-            // Draw
             overlay.toaster.pushToast(templateRandomText(GameDrawText), 8000);
           }
+          const winnerUuids = new Set(
+            nextState.winningTeams.map((t) => t.uuid),
+          );
+          const teamResults = gameState.getTeams().map((t) => ({
+            name: t.name,
+            uuid: t.uuid,
+            group: t.group,
+            isWinner: winnerUuids.has(t.uuid),
+            worms: t.worms.map((w) => ({
+              name: w.name,
+              health: w.health,
+              maxHealth: w.maxHealth,
+            })),
+          }));
+          let endOfGameFadeOut = 8000;
+          const goToResultsAfterFade = (dt: Ticker) => {
+            endOfGameFadeOut -= dt.deltaMS;
+            if (endOfGameFadeOut < 0) {
+              game.pixiApp.ticker.remove(goToResultsAfterFade);
+              game.gameReactChannel.goToMenu(teamResults);
+            }
+          };
+          game.pixiApp.ticker.add(goToResultsAfterFade);
         }
       }
     });

@@ -95,4 +95,4 @@ v [`docs/`](./docs).
 
 ---
 
-_Vytvořeno pro GCC Game Competition 2026._
+_Vytvořeno pro GCC Vibe Coding Competition 2026._

@@ -342,12 +342,14 @@ export default async function runScenario(game: Game) {
             })),
           }));
           let endOfGameFadeOut = 8000;
-          game.pixiApp.ticker.add((dt) => {
+          const goToResultsAfterFade = (dt: Ticker) => {
             endOfGameFadeOut -= dt.deltaMS;
             if (endOfGameFadeOut < 0) {
+              game.pixiApp.ticker.remove(goToResultsAfterFade);
               game.gameReactChannel.goToMenu(teamResults);
             }
-          });
+          };
+          game.pixiApp.ticker.add(goToResultsAfterFade);
         }
       }
     });

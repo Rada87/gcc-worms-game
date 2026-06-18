@@ -2,11 +2,11 @@
 export default {
   testEnvironment: "node",
   transform: {
-    "^.+.ts$": ["ts-jest",{}],
+    "^.+.ts$": ["ts-jest", {}],
   },
   rootDir: "spec",
-  "moduleNameMapper": {
-    '^[@./a-zA-Z0-9$_-]+\\.(png|gif)$': '<rootDir>/test-utils/filemock.ts',
+  moduleNameMapper: {
+    "^[@./a-zA-Z0-9$_-]+\\.(png|gif)$": "<rootDir>/test-utils/filemock.ts",
   },
   // These suites rely on the upstream Rapier-based physics harness, which is
   // broken under jest (the "test environment is sane" baseline fails: players
@@ -16,8 +16,7 @@ export default {
   testPathIgnorePatterns: [
     "/node_modules/",
     "unit/movementContoller.spec.ts",
-    "unit/logic/gamestate.test.ts",
     "unit/terrain/spawner.spec.ts",
   ],
-  globalSetup: "./unit/setup.ts"
+  globalSetup: "./unit/setup.ts",
 };
