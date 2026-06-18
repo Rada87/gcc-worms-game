@@ -98,17 +98,6 @@ function mainMenu(
             style={{ flexDirection: "column" }}
           >
             <button
-              onClick={() => onLocalGame()}
-              onMouseOver={videoHover}
-              onMouseOut={videoHoverOut}
-              className={styles.primaryTile}
-            >
-              <span onMouseOver={videoHover} onMouseOut={videoHoverOut}>
-                Skirmish
-              </span>
-              <video muted src={settingsAnim} loop />
-            </button>
-            <button
               onClick={() => onQuickGame()}
               onMouseOver={videoHover}
               onMouseOut={videoHoverOut}
@@ -116,6 +105,17 @@ function mainMenu(
             >
               <span onMouseOver={videoHover} onMouseOut={videoHoverOut}>
                 Quick Game
+              </span>
+              <video muted src={settingsAnim} loop />
+            </button>
+            <button
+              onClick={() => onLocalGame()}
+              onMouseOver={videoHover}
+              onMouseOut={videoHoverOut}
+              className={styles.primaryTile}
+            >
+              <span onMouseOver={videoHover} onMouseOut={videoHoverOut}>
+                Skirmish
               </span>
               <video muted src={settingsAnim} loop />
             </button>
