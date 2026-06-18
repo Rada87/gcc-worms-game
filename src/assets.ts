@@ -14,6 +14,7 @@ const log = new Logger("Assets");
 let textures: Record<string, Texture>;
 let sounds: Record<string, Sound>;
 let data: Record<string, unknown>;
+let loadAssetsPromise: Promise<void> | undefined;
 
 const internalAssetLoadPercentage = new BehaviorSubject(0);
 
@@ -23,27 +24,33 @@ export const assetsAreReady = internalAssetLoadPercentage.pipe(
 );
 
 export async function loadAssets() {
-  await Assets.init({ manifest });
-
-  const bundleCount = manifest.bundles.length;
-  for (let i = 0; i < manifest.bundles.length; i++) {
-    const { name } = manifest.bundles[i];
-    log.debug("Loading bundle", name);
-    const bundle = await Assets.loadBundle(name, (progress) => {
-      log.debug("Bundle progress", name, progress);
-      internalAssetLoadPercentage.next((i + progress) / bundleCount);
-    });
-    log.debug("Loaded bundle", name);
-    if (name === "textures") {
-      textures = bundle;
-    } else if (name === "sounds") {
-      sounds = bundle;
-    } else if (name === "data") {
-      data = bundle;
-    }
+  if (textures && sounds && data) {
+    return;
   }
-  log.debug("Bundle load complete");
-  internalAssetLoadPercentage.next(1);
+  loadAssetsPromise ??= (async () => {
+    await Assets.init({ manifest });
+
+    const bundleCount = manifest.bundles.length;
+    for (let i = 0; i < manifest.bundles.length; i++) {
+      const { name } = manifest.bundles[i];
+      log.debug("Loading bundle", name);
+      const bundle = await Assets.loadBundle(name, (progress) => {
+        log.debug("Bundle progress", name, progress);
+        internalAssetLoadPercentage.next((i + progress) / bundleCount);
+      });
+      log.debug("Loaded bundle", name);
+      if (name === "textures") {
+        textures = bundle;
+      } else if (name === "sounds") {
+        sounds = bundle;
+      } else if (name === "data") {
+        data = bundle;
+      }
+    }
+    log.debug("Bundle load complete");
+    internalAssetLoadPercentage.next(1);
+  })();
+  await loadAssetsPromise;
 }
 
 export function getAssets() {

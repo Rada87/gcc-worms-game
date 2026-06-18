@@ -1,10 +1,15 @@
-import { useCallback, useEffect, useState } from "preact/hooks";
+import { useCallback, useEffect, useMemo, useState } from "preact/hooks";
 import { IngameView } from "./ingame-view";
 import Menu from "./menu";
 import { NetClientConfig, NetGameClient } from "../../net/client";
 import { GameReactChannel, TeamResult } from "../../interop/gamechannel";
 import type { AssetData } from "../../assets/manifest";
-import { getClientConfigHook, useGameSettingsHook } from "../../settings";
+import {
+  DEFAULT_TEAMS,
+  getClientConfigHook,
+  getLocalTeams,
+  useGameSettingsHook,
+} from "../../settings";
 import { MotionConfig } from "framer-motion";
 import {
   IRunningGameInstance,
@@ -14,6 +19,8 @@ import Logger from "../../log";
 import { ResultsScreen } from "./results";
 import { saveMatch } from "../../leaderboard";
 import { GameMenu } from "./menus/types";
+import { TeamGroup } from "../../logic/teams";
+import { loadAssets } from "../../assets";
 
 const log = new Logger("App");
 
@@ -24,6 +31,26 @@ interface LoadGameProps {
   instanceKey: string;
 }
 
+async function createLocalGameInstance(level?: string) {
+  await loadAssets();
+  const gameInstance = new LocalGameInstance();
+  const storedTeams = getLocalTeams();
+  const allTeams =
+    storedTeams.length >= 2
+      ? storedTeams
+      : [...storedTeams, ...DEFAULT_TEAMS].slice(0, 2);
+  const levelAsset = level ? `levels_${level}` : "levels_gccOctavia";
+
+  await gameInstance.addProposedTeam(allTeams[0], 3, TeamGroup.Red);
+  await gameInstance.addProposedTeam(allTeams[1], 3, TeamGroup.Blue);
+  await gameInstance.chooseNewLevel(
+    levelAsset,
+    levelAsset,
+    level ?? "ŠKODA GCC Octavia",
+  );
+  return gameInstance;
+}
+
 export function App() {
   const [gameState, setGameState] = useState<LoadGameProps>();
   const [gameResult, setGameResult] = useState<TeamResult[] | null>(null);
@@ -31,7 +58,7 @@ export function App() {
   const [client, setClient] = useState<NetGameClient>();
   const [clientConfig, setClientConfig, { removeItem: removeClientConfig }] =
     getClientConfigHook();
-  const gameReactChannel = new GameReactChannel();
+  const gameReactChannel = useMemo(() => new GameReactChannel(), []);
 
   const [lobbyGameRoomId, setLobbyGameRoomId] = useState<string>();
   const [settings] = useGameSettingsHook();
@@ -43,13 +70,13 @@ export function App() {
       setLobbyGameRoomId(gId);
     } else if (preStateConfig) {
       const [scenario, level] = preStateConfig.split(";");
-      const gameInstance = new LocalGameInstance();
-      gameInstance.startGame();
-      setGameState({
-        scenario,
-        level,
-        gameInstance,
-        instanceKey: crypto.randomUUID(),
+      void createLocalGameInstance(level).then((gameInstance) => {
+        setGameState({
+          scenario,
+          level,
+          gameInstance,
+          instanceKey: crypto.randomUUID(),
+        });
       });
     }
   }, []);
@@ -72,16 +99,26 @@ export function App() {
     return () => client?.stop();
   }, [clientConfig]);
 
-  gameReactChannel.on("goToMenu", (event) => {
-    setGameState(undefined);
-    if (event.winDetails?.teams) {
-      saveMatch(event.winDetails.teams);
-      setGameResult(event.winDetails.teams);
-    }
-  });
+  useEffect(() => {
+    const goToMenu = (event: { winDetails?: { teams: TeamResult[] } }) => {
+      setGameState(undefined);
+      if (event?.winDetails?.teams) {
+        saveMatch(event.winDetails.teams);
+        setGameResult(event.winDetails.teams);
+      }
+    };
 
-  gameReactChannel.on("replayGame", () => {
-    if (gameState) {
+    gameReactChannel.on("goToMenu", goToMenu);
+    return () => {
+      gameReactChannel.off("goToMenu", goToMenu);
+    };
+  }, [gameReactChannel]);
+
+  useEffect(() => {
+    const replayGame = () => {
+      if (!gameState) {
+        return;
+      }
       const newGameInstance =
         gameState.gameInstance instanceof LocalGameInstance
           ? gameState.gameInstance.createReplay()
@@ -93,8 +130,13 @@ export function App() {
         gameInstance: newGameInstance,
         instanceKey: crypto.randomUUID(),
       });
-    }
-  });
+    };
+
+    gameReactChannel.on("replayGame", replayGame);
+    return () => {
+      gameReactChannel.off("replayGame", replayGame);
+    };
+  }, [gameReactChannel, gameState]);
 
   const onNewGame = useCallback(
     (
